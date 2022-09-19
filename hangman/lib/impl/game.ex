@@ -49,9 +49,6 @@ defmodule Hangman.Impl.Game do
   end
 
   defp score_guess(game, _good_guess = true) do
-    # guessed all letters? -> :won | :good_guess
-    # wombat
-    # abcomtw
     new_state = maybe_won(MapSet.subset?(MapSet.new(game.letters), game.used))
     %{ game | game_state: new_state }
   end
