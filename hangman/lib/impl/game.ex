@@ -48,15 +48,18 @@ defmodule Hangman.Impl.Game do
     |> score_guess(Enum.member?(game.letters, guess))
   end
 
+  @spec score_guess(t, boolean) :: t
   defp score_guess(game, _good_guess = true) do
     new_state = maybe_won(MapSet.subset?(MapSet.new(game.letters), game.used))
     %{ game | game_state: new_state }
   end
 
+  @spec score_guess(t, boolean) :: t
   defp score_guess(game = %{ turns_left: 1}, _bad_guess) do
     %{ game | game_state: :lost, turns_left: 0 }
   end
 
+  @spec score_guess(t, boolean) :: t
   defp score_guess(game, _bad_guess) do
     %{ game | game_state: :bad_guess, turns_left: game.turns_left - 1 }
   end
